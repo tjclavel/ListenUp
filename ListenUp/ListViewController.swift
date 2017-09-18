@@ -25,6 +25,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         catch {
             print("\(error)")
         }
+        if table != nil {
+            table.reloadData()
+        }
     }
 
     override func viewDidLoad() {
@@ -53,7 +56,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "list")!
-        cell.textLabel?.text = lists[indexPath.row].title!
+        let list = lists[indexPath.row]
+        cell.textLabel?.text = list.title!
+        if list.tasks?.count == 0 {
+            cell.accessoryView = blueDot()
+        } else {
+            cell.accessoryView = spinner(getPerc(list))
+        }
         return cell
     }
     
@@ -81,6 +90,32 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             taskVC.title = passing?.title!
             taskVC.forList = passing
         }
+    }
+    
+    func blueDot() -> UIImageView {
+        let image = UIImageView(image: #imageLiteral(resourceName: "blue dot"))
+        image.contentMode = .scaleAspectFit
+        image.bounds.size = CGSize(width: 20, height: 14)
+        return image
+    }
+    
+    func spinner(_ perc: CGFloat) -> Spinner {
+        let spinner = Spinner()
+        spinner.bounds.size = CGSize(width: 20, height: 20)
+        spinner.perc = perc
+        spinner.backgroundColor = UIColor.white
+        return spinner
+    }
+    
+    func getPerc(_ list: List) -> CGFloat {
+        let outOf = list.tasks!.count
+        var completed: CGFloat = 0
+        for task in list.tasks!.allObjects as! [Task] {
+            if task.completed {
+                completed += 1
+            }
+        }
+        return completed / CGFloat(outOf)
     }
 
 }

@@ -17,6 +17,7 @@
 		A63AC8E61F6F8477000E4C38 /* ListenUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63AC8E51F6F8477000E4C38 /* ListenUpUITests.swift */; };
 		A63AC8F41F6F84BA000E4C38 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63AC8F31F6F84BA000E4C38 /* DatabaseController.swift */; };
 		A63AC8F81F6F99B6000E4C38 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63AC8F71F6F99B6000E4C38 /* TaskViewController.swift */; };
+		A66564541F7047310014F6C8 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66564531F7047310014F6C8 /* Spinner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		A63AC8E71F6F8477000E4C38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A63AC8F31F6F84BA000E4C38 /* DatabaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		A63AC8F71F6F99B6000E4C38 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		A66564531F7047310014F6C8 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				A63AC8C21F6F8477000E4C38 /* AppDelegate.swift */,
 				A63AC8C41F6F8477000E4C38 /* ListViewController.swift */,
 				A63AC8F71F6F99B6000E4C38 /* TaskViewController.swift */,
+				A66564531F7047310014F6C8 /* Spinner.swift */,
 				A63AC8F31F6F84BA000E4C38 /* DatabaseController.swift */,
 				A63AC8C61F6F8477000E4C38 /* Main.storyboard */,
 				A63AC8CC1F6F8477000E4C38 /* Assets.xcassets */,
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A63AC8F41F6F84BA000E4C38 /* DatabaseController.swift in Sources */,
+				A66564541F7047310014F6C8 /* Spinner.swift in Sources */,
 				A63AC8C51F6F8477000E4C38 /* ListViewController.swift in Sources */,
 				A63AC8F81F6F99B6000E4C38 /* TaskViewController.swift in Sources */,
 				A63AC8C31F6F8477000E4C38 /* AppDelegate.swift in Sources */,
