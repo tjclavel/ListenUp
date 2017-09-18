@@ -57,6 +57,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
+            for task in lists[indexPath.row].tasks?.allObjects as! [Task] {
+                context.delete(task)
+            }
+            context.delete(lists[indexPath.row])
+            lists.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+    
     var passing: List?
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         passing = lists[indexPath.row]

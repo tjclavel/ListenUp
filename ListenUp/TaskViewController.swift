@@ -53,6 +53,15 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
+            context.delete(tasks![indexPath.row])
+            tasks!.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         if cell?.accessoryType == .checkmark {
