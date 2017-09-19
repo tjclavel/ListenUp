@@ -29,23 +29,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             table.reloadData()
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     
     @IBAction func createNewList(_ sender: Any) {
         let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
-        let list: List = NSEntityDescription.insertNewObject(forEntityName: "List", into: context) as! List
         let alert = UIAlertController(title: "New List", message: "Enter a list name", preferredStyle: .alert)
-        alert.addTextField(configurationHandler: nil)
+        alert.addTextField { textField in
+            textField.autocapitalizationType = .sentences
+            textField.autocorrectionType = .yes
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
-            list.title = textField.text!
-            self.lists.append(list)
-            self.table.reloadData()
+            if textField.text! != "" {
+                let list: List = NSEntityDescription.insertNewObject(forEntityName: "List", into: context) as! List
+                list.title = textField.text!
+                list.created = NSDate()
+                self.lists.append(list)
+                self.table.reloadData()
+            }
         }))
         self.present(alert, animated: true, completion: nil)
     }

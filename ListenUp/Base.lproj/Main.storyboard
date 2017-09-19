@@ -37,9 +37,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="848-aG-H9k">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="848-aG-H9k">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="list" id="fTC-7Z-KGc">
@@ -58,6 +57,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZSF-4u-KQ9" firstAttribute="top" secondItem="848-aG-H9k" secondAttribute="bottom" id="DMi-uf-uEp"/>
+                            <constraint firstAttribute="trailing" secondItem="848-aG-H9k" secondAttribute="trailing" id="UAR-lM-R3K"/>
+                            <constraint firstItem="848-aG-H9k" firstAttribute="top" secondItem="gj9-Gj-aZ0" secondAttribute="bottom" id="gT4-vA-c3S"/>
+                            <constraint firstItem="848-aG-H9k" firstAttribute="leading" secondItem="EyO-je-PqU" secondAttribute="leading" id="s87-0l-7xa"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Lists" id="VMP-4k-M9m">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="AV4-Bv-KgB">
@@ -87,9 +92,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qze-9w-FpT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qze-9w-FpT">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="task" id="QTE-ZV-ViP">
@@ -108,6 +112,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qze-9w-FpT" firstAttribute="leading" secondItem="eey-11-RJF" secondAttribute="leading" id="19s-ro-3B6"/>
+                            <constraint firstItem="Qze-9w-FpT" firstAttribute="top" secondItem="8YT-Rf-2kR" secondAttribute="bottom" id="biQ-k7-nfj"/>
+                            <constraint firstItem="gqC-0W-KGO" firstAttribute="top" secondItem="Qze-9w-FpT" secondAttribute="bottom" id="c3T-x5-RjJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Qze-9w-FpT" secondAttribute="trailing" id="gIv-bO-fud"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="pP7-tc-QbM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aCn-gM-3F3">

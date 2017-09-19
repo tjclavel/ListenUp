@@ -25,17 +25,19 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func addTask(_ sender: Any) {
         let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
-        let task: Task = NSEntityDescription.insertNewObject(forEntityName: "Task", into: context) as! Task
         let alert = UIAlertController(title: "New Task", message: "Enter a task title", preferredStyle: .alert)
         alert.addTextField(configurationHandler: nil)
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0]
-            task.title = textField.text!
-            task.completed = false
-            self.forList?.addToTasks(task)
-            self.tasks!.append(task)
-            self.table.reloadData()
+            if textField.text! != "" {
+                let task: Task = NSEntityDescription.insertNewObject(forEntityName: "Task", into: context) as! Task
+                task.title = textField.text!
+                task.completed = false
+                self.forList?.addToTasks(task)
+                self.tasks!.append(task)
+                self.table.reloadData()
+            }
         }))
         self.present(alert, animated: true, completion: nil)
     }
