@@ -12,18 +12,22 @@ import CoreData
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
-    var lists = [List]()
+    var lists: [List]!
     
     override func viewWillAppear(_ animated: Bool) {
-        let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
+        if lists == nil {
+            let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
         
-        let fetchRequest: NSFetchRequest = List.fetchRequest()
+            let fetchRequest: NSFetchRequest = List.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "created", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
         
-        do {
-            lists = try context.fetch(fetchRequest) as [List]
-        }
-        catch {
-            print("\(error)")
+            do {
+                lists = try context.fetch(fetchRequest) as [List]
+            }
+            catch {
+                print("\(error)")
+            }
         }
         if table != nil {
             table.reloadData()
@@ -57,7 +61,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "list")!
-        let list = lists[indexPath.row]
+        let list = lists[lists.count - indexPath.row - 1]
         cell.textLabel?.text = list.title!
         if list.tasks?.count == 0 {
             cell.accessoryView = blueDot()
@@ -70,18 +74,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
-            for task in lists[indexPath.row].tasks?.allObjects as! [Task] {
+            for task in lists[lists.count - indexPath.row - 1].tasks?.allObjects as! [Task] {
                 context.delete(task)
             }
-            context.delete(lists[indexPath.row])
-            lists.remove(at: indexPath.row)
+            context.delete(lists[lists.count - indexPath.row - 1])
+            lists.remove(at: lists.count - indexPath.row - 1)
             tableView.reloadData()
         }
     }
     
     var passing: List?
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        passing = lists[indexPath.row]
+        passing = lists[lists.count - indexPath.row - 1]
         performSegue(withIdentifier: "toList", sender: self)
     }
     

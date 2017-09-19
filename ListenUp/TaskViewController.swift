@@ -12,15 +12,11 @@ import CoreData
 class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
-    var forList: List?
-    var tasks: [Task]?
+    var forList: List!
+    var tasks: [Task]!
 
     override func viewWillAppear(_ animated: Bool) {
-        tasks = forList?.tasks?.allObjects as? [Task]
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        tasks = (forList.tasks!.allObjects as! [Task]).sorted { $1.created! as Date >= $0.created! as Date }
     }
 
     @IBAction func addTask(_ sender: Any) {
@@ -34,8 +30,9 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let task: Task = NSEntityDescription.insertNewObject(forEntityName: "Task", into: context) as! Task
                 task.title = textField.text!
                 task.completed = false
-                self.forList?.addToTasks(task)
-                self.tasks!.append(task)
+                task.created = NSDate()
+                self.forList.addToTasks(task)
+                self.tasks.append(task)
                 self.table.reloadData()
             }
         }))
@@ -43,14 +40,16 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks!.count
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "task")!
-        cell.textLabel?.text = tasks![indexPath.row].title
-        if tasks![indexPath.row].completed {
+        cell.textLabel?.text = tasks[tasks.count - indexPath.row - 1].title
+        if tasks[tasks.count - indexPath.row - 1].completed {
             cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
         }
         return cell
     }
@@ -58,8 +57,8 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             let context: NSManagedObjectContext = DatabaseController.persistentContainer.viewContext
-            context.delete(tasks![indexPath.row])
-            tasks!.remove(at: indexPath.row)
+            context.delete(tasks[tasks.count - indexPath.row - 1])
+            tasks!.remove(at: tasks.count - indexPath.row - 1)
             tableView.reloadData()
         }
     }
@@ -68,10 +67,10 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.cellForRow(at: indexPath)
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            tasks![indexPath.row].completed = false
+            tasks[tasks.count - indexPath.row - 1].completed = false
         } else {
             cell?.accessoryType = .checkmark
-            tasks![indexPath.row].completed = true
+            tasks[tasks.count - indexPath.row - 1].completed = true
         }
     }
 
